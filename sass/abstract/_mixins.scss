@@ -1,0 +1,58 @@
+@mixin font-styling($font-size, $font-weight, $letter-spacing) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin position-absolute-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px   :   PHONE
+600 - 900px :   TABLET PORTRAIT
+900 - 1200px:   TABLET LANDSCAPE
+1800px +    :   DESKTOPS
+- phone
+- tab-port
+- tab-land
+- desktop
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      // 600 px = 37.9 em
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      // 12000 px = 75 em
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      // 900 px = 56.25 em
+      @content;
+    }
+  }
+  @if $breakpoint == dektop {
+    @media only screen and (min-width: 112.5) {
+      // 18000+px = 112.5 em
+      @content;
+    }
+  }
+}
